@@ -1,0 +1,25 @@
+{
+  "name": "graphql-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "graphpack",
+    "build": "graphpack build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aroos0786/graphql-server.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aroos0786/graphql-server/issues"
+  },
+  "homepage": "https://github.com/aroos0786/graphql-server#readme",
+  "devDependencies": {
+    "graphpack": "^1.0.9"
+  }
+}
