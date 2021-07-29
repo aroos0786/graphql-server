@@ -1,4 +1,4 @@
-import {users} from "./db";
+import {users, admins} from "./db";
 
 const resolvers = {
     Query: {
@@ -7,6 +7,12 @@ const resolvers = {
         },
         users : (parent, args, context, info) => {
             return users;
+        },
+        admin: (parent, {id}, context, info) => {
+            return admins.find(admin => admin.id === id);
+        },
+        admins: (parent, args,context, info) => {
+            return admins;
         }
     }
 };
