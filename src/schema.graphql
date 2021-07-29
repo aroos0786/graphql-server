@@ -6,6 +6,15 @@ type Query {
     admin(id: ID!): Admin!
 }
 
+type Mutation {
+  createUser(id: ID!, name: String!, email: String!, age: Int): User!
+  updateUser(id: ID!, name: String, email: String, age: Int): User!
+  deleteUser(id: ID!): User!
+  createAdmin(id: ID!, name: String!, email: String!): Admin!
+  updateAdmin(id: ID!, name: String, email: String): Admin!
+  deleteAdmin(id: ID!): Admin!
+}
+
 type User {
     id: ID!
     name: String!
@@ -15,6 +24,6 @@ type User {
 
 type Admin {
     id: ID!
-    name: String
-    email: String
+    name: String!
+    email: String!
 }
