@@ -1,4 +1,4 @@
-import {users, admins} from "./db";
+import {users, admins} from "./db.js";
 
 const resolvers = {
     Query: {
@@ -53,7 +53,7 @@ const resolvers = {
 
             newAdmin.name = name;
             newAdmin.email = email;
-            
+             
             return newAdmin;
         },
         deleteAdmin: (parent, {id}, context, info) => {

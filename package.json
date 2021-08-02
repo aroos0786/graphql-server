@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "graphpack",
-    "build": "graphpack build"
+    "build": "graphpack build",
+    "start": "nodemon start src/index.js"
   },
   "repository": {
     "type": "git",
@@ -21,5 +23,10 @@
   "homepage": "https://github.com/aroos0786/graphql-server#readme",
   "devDependencies": {
     "graphpack": "^1.0.9"
+  },
+  "dependencies": {
+    "apollo-server": "^3.1.1",
+    "graphql": "^15.5.1",
+    "nodemon": "^2.0.12"
   }
 }
