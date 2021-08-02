@@ -1,4 +1,4 @@
-import {users, admins} from "./db.js";
+import {users, admins, products} from "./db.js";
 
 const resolvers = {
     Query: {
@@ -14,7 +14,16 @@ const resolvers = {
         admins: (parent, args,context, info) => {
             return admins;
         },
+        product: (parent, {id}, context, info) => {
+            return products.find(product => product.id == id);
+        },
+        products: () => products
     },
+    Product:{
+        id: (parent) => parent.id,
+        name: (parent) => parent.name,
+    }
+    ,
     Mutation: {
         createUser: (parent , {id, name, email, age}, context, info) => {
             
@@ -63,6 +72,25 @@ const resolvers = {
             const deletedAdmins = admins.splice(adminIndex,1);
 
             return deletedAdmins[0];
+        },
+        createProduct: (parent, {id, name}, context, info) => {
+            const newProduct = {id, name};
+            products.push(newProduct);
+            return newProduct;
+        },
+        updateProduct: (parent, {id, name}, context, info) => {
+            let newProduct = products.find(product => product.id == id);
+
+            newProduct.name = name;
+
+            return newProduct;
+        },
+        deleteProduct: (parent, {id}, context, info) => {
+            const productIndex = products.findIndex(product=> product.id == id);
+            if(productIndex == -1) throw new Error("The product in not avaiable");
+
+            const deletedProduct = products.splice(productIndex, 1);
+            return deletedProduct[0];
         }
     }
 };

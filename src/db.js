@@ -27,3 +27,13 @@ export let admins = [
         id: 3, name: "Admin2", email: "admin2@admin.com"
     }
 ]
+
+export let products = [
+    {id: 1, name: "laptop"},
+    {id: 2, name: "mobile"},
+    {id: 3, name: "chair"},
+    {id: 4, name: "table"},
+    {id: 5, name: "charger"},
+    {id: 6, name: "backtip"},
+    {id: 7, name: "led"},
+]

@@ -8,6 +8,8 @@ type Query {
     user(id: ID!): User!
     admins: [Admin!]!
     admin(id: ID!): Admin!
+    product(id: ID!): Product!
+    products: [Product!]!
 }
 
 type Mutation {
@@ -17,6 +19,9 @@ type Mutation {
   createAdmin(id: ID!, name: String!, email: String!): Admin!
   updateAdmin(id: ID!, name: String, email: String): Admin!
   deleteAdmin(id: ID!): Admin!
+  createProduct(id: ID!, name: String!): Product!
+  updateProduct(id: ID!, name: String): Product!
+  deleteProduct(id: ID!): Product!
 }
 
 type User {
@@ -30,6 +35,11 @@ type Admin {
     id: ID!
     name: String!
     email: String!
+}
+
+type Product {
+    id: ID!
+    name: String!
 }
 
 `;

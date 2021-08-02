@@ -13,6 +13,9 @@ type Mutation {
   createAdmin(id: ID!, name: String!, email: String!): Admin!
   updateAdmin(id: ID!, name: String, email: String): Admin!
   deleteAdmin(id: ID!): Admin!
+  createProduct(id: ID!, name: String!): Product!
+  updateProduct(id: ID!, name: String): Product!
+  deleteProduct(id: ID!): Product!
 }
 
 type User {
