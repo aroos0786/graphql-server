@@ -1,54 +1,111 @@
-import {ApolloServer} from "apollo-server";
+// const {ApolloServer} = require("apollo-server");
+// const resolvers = require("./resolvers");
 import resolvers from "./resolvers.js";
+import { ApolloServer } from "apollo-server";
+import { typeDef as Product } from "./schemas/product.js";
+import { typeDef as Country } from "./schemas/country.js";
+import { typeDef as PaymentMethod } from "./schemas/paymentmethod.js";
 
 const typeDefs = `
 
+union SearchResults = User | Admin | Link
+union Error = User | Link 
+
 type Query {
-    users : [User!]!
+    users(role: UserRoleEnum): [User!]!
     user(id: ID!): User!
     admins: [Admin!]!
     admin(id: ID!): Admin!
-    product(id: ID!): Product!
+    feed: [Link!]!
+    books: [Book!]!
+    search(contains: String): [SearchResults!]
     products: [Product!]!
-}
+    product_gallary: [Gallary!]!
+    categories: [Category!]!
+    categorydetail: [CategoryDetail]
+    productcategories: [ProductCategory]
+    units: [Units]
+    product_gallary_detail: [productGallaryDetail]
+    product_brand: ProductBrand!
+    attribute: Attribute
+  }
+  
+  type User {
+      id: ID!
+      name: String!
+      email: String!
+      age: Int
+      phone: String
+        username: String!
+        role: UserRoleEnum!
+  }
+  
+  enum UserRoleEnum {
+    ADMIN
+    ACCOUNTANT
+  }
 
-type Mutation {
-  createUser(id: ID!, name: String!, email: String!, age: Int): User!
-  updateUser(id: ID!, name: String, email: String, age: Int): User!
-  deleteUser(id: ID!): User!
-  createAdmin(id: ID!, name: String!, email: String!): Admin!
-  updateAdmin(id: ID!, name: String, email: String): Admin!
-  deleteAdmin(id: ID!): Admin!
-  createProduct(id: ID!, name: String!): Product!
-  updateProduct(id: ID!, name: String): Product!
-  deleteProduct(id: ID!): Product!
-}
-
-type User {
+  type Admin {
+      id: ID!
+      name: String!
+      email: String!
+  } 
+  
+  type Link {
     id: ID!
-    name: String!
-    email: String!
-    age: Int
-}
+    description: String!
+    url: String!
+  }
+  
+  type Mutation {
+      createUser(id: ID!, name: String!, email: String!, age: Int ): User!
+      updateUser(id: ID!, name: String, email: String, age: Int ): User!
+      deleteUser(id: ID!): User!
+      createAdmin(id: ID!, name: String!, email: String!, age: Int): Admin!
+      updateAdmin(id: ID!, name: String, email: String, age: Int): Admin!
+      deleteAdmin(id: ID!): Admin!
+      register: Error
+  }
 
-type Admin {
-    id: ID!
-    name: String!
-    email: String!
-}
+  interface Book {
+    title: String!
+    author: Author!
+  }
 
-type Product {
-    id: ID!
+  type Author {
     name: String!
-}
+  }
+
+  type Course {
+    name: String!
+  }
+
+  type Textbook implements Book {
+    title: String!
+    author: Author!
+    courses: [Course!]!
+  }
+
+  type ColoringBook implements Book {
+    title: String!
+    author: Author!
+    colors: [String!]!
+  }
+
+
+
+
+#==================================================================================================================================================
+      #PRODUCT SCHEMA
+
 
 `;
 
 const server = new ApolloServer({
-    typeDefs,
-    resolvers
-})
+    typeDefs: [Product, typeDefs, Country, PaymentMethod],
+    resolvers,
+});
 
-server.listen().then(({url}) => {
-    console.log(`the server is running on ${url}`)
-})
+// const url = "http://localhost:3000";
+
+server.listen().then(({ url }) => console.log(`Server is running on ${url}`));
