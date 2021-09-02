@@ -24,7 +24,9 @@ type Product {
     category: Category
     product_gallary: Gallary!
     detail: [Detail!]
-    attribute: Attribute
+    attribute: [Attribute]
+    product_combination: [ProductCombination]
+    countries: [Country]!
   }
   type ProductBrand {
     id: ID!
@@ -112,6 +114,69 @@ type Product {
   type Attribute {
     id: ID
     name: String
+    product_id: Int
+    created_by: Int
+    updated_by: Int
+    attributes: Attributes
+    variations: [Variation]!
+  }
+  type Attributes {
+    id: ID!
+    attribute_id: Int
+    detail: [AttributeDetail]
+  }
+  type AttributeDetail {
+    id: ID!
+    attribute_id: Int
+    language_id: Int
+    name: String
+  }
+  type Variation {
+    product_variation: ProductVariation
+  }
+  type ProductVariation {
+    id: ID!
+    detail: [VariationDetail]!
+  }
+  type VariationDetail {
+    id: ID!
+    name: String
+    variation_id: Int
+    language_id: Int
+    language: Language
+  }
+  type Language {
+    id: ID!
+    name: String
+    code: String
+    directory: String
+    is_default: Int
+    direction: String
+    created_by: Int
+    updated_by: Int
+    deleted_at: String
+    created_at: String
+    updated_at: String
+  }
+  
+  type ProductCombination { 
+    id: ID!
+    product_id: Int
+    sku: String
+    price: String
+    available_qty: String
+    gallary_id: Int
+    gallary: Gallary
+    combination: [ProductCombinationDetail]
+  }
+  type ProductCombinationDetail {
+    id: ID!
+    variation_id: Int
+    product_id: Int
+    product_combination_id: Int
   }
 
+
 `;
+
+

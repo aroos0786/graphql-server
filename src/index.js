@@ -4,7 +4,9 @@ import resolvers from "./resolvers.js";
 import { ApolloServer } from "apollo-server";
 import { typeDef as Product } from "./schemas/product.js";
 import { typeDef as Country } from "./schemas/country.js";
-import { typeDef as PaymentMethod } from "./schemas/paymentmethod.js";
+import { typeDef as PaymentMethod } from "./schemas/paymentMethod.js";
+import {  typeDefs as Settings } from "./schemas/settings.js"
+import { typeDefs as Currency } from "./schemas/currency.js";
 
 const typeDefs = `
 
@@ -28,6 +30,17 @@ type Query {
     product_gallary_detail: [productGallaryDetail]
     product_brand: ProductBrand!
     attribute: Attribute
+    product_combination: ProductCombination
+
+    #===============Country==============#
+    countries: [Country]!
+    states: [State]!
+
+    #============Settings========#
+    settings: [Settings]!
+
+    #=========Currency=======//#
+    currency: [Currency]!
   }
   
   type User {
@@ -93,17 +106,11 @@ type Query {
   }
 
 
-
-
-#==================================================================================================================================================
-      #PRODUCT SCHEMA
-
-
 `;
 
 const server = new ApolloServer({
-    typeDefs: [Product, typeDefs, Country, PaymentMethod],
-    resolvers,
+  typeDefs: [Product, typeDefs, Country, PaymentMethod, Settings, Currency],
+  resolvers,
 });
 
 // const url = "http://localhost:3000";
