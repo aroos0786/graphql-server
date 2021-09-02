@@ -30,3 +30,9 @@ type Admin {
     name: String!
     email: String!
 }
+ type Product {
+     id: ID!
+     name: String
+     value: String
+ }
+
